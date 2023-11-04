@@ -1,13 +1,15 @@
 
+import throttle from "lodash.throttle";
+
 const feedbackForm = document.querySelector('.feedback-form');
-const onInput = (e) => {
+const onInput = throttle((e) => {
     const feedback = {};
     const formData = new FormData(feedbackForm);
     formData.forEach((value, name) => {
         feedback[name] = value;
     });
     localStorage.setItem('feedback-form-state', JSON.stringify(feedback));
-};
+}, 500);
 const onSubmit = (e) => {
     e.preventDefault();
     console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
