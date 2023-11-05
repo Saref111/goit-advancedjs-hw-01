@@ -12,7 +12,11 @@ const onInput = throttle((e) => {
 }, 500);
 const onSubmit = (e) => {
     e.preventDefault();
-    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+    
+    const data = JSON.parse(localStorage.getItem('feedback-form-state'));
+    if (!data || !data?.email || !data?.message)  return alert('Please fill in all the fields!');
+     
+    console.log(data);
     localStorage.removeItem('feedback-form-state');
     e.currentTarget.reset();
 };
